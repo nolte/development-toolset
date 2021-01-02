@@ -1,0 +1,26 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: install precondition package
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - net-tools
+        - unzip
+        - rsync
+        - gnupg2
+
+    - name: Add the user 'johnd'
+      user:
+        name: johnd
+        comment: John Doe
+  tasks:
+    - name: "Include ansible-role-toolset-collection"
+      include_role:
+        name: "toolset"

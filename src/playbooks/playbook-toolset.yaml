@@ -1,0 +1,23 @@
+---
+- name: configure
+  hosts: all
+  #become: true
+  #become_user: vagrant
+  tasks:
+    - ping:
+    - name: Update all packages to their latest version
+      become: true
+      apt:
+        name: "*"
+        state: latest
+    - include_role:
+        name: ../roles/toolset
+        #apply:
+        #  tags:
+
+      tags:
+        - clitools
+        - python
+        - docker
+        - tools
+        - sshd

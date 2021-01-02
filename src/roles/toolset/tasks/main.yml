@@ -1,0 +1,70 @@
+---
+# tasks file for ansible-role-toolset-collection
+- name: install Common Packages
+  block:
+    - name: Install ntpdate
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - "{{ extra_tools }}"
+  become: true
+  tags:
+  - tools
+
+- name: install python docker
+  block:
+      - name: set python default path
+        community.general.alternatives:
+            name: python
+            link: /usr/bin/python
+            path: /usr/bin/python3
+        tags:
+        - python
+      - include_role:
+            name: geerlingguy.pip
+        tags:
+        - python
+      - include_role:
+            name: geerlingguy.docker
+        tags:
+        - docker
+  become: true
+  tags:
+  - python
+  - docker
+
+- name: Install commandline tools
+  block:
+    - include_role:
+        name: sicruse.powerline-fonts
+
+    - include_role:
+        name: gantsign.oh-my-zsh
+
+    - include_tasks: ./zsh-extras.yaml
+
+    - include_role:
+        name: markosamuli.asdf
+  tags:
+  - clitools
+
+- name: Install UI Tools
+  block:
+      - include_role:
+            name: xanmanning.vscode
+        tags:
+        - tools
+      - include_role:
+            name: marverix.chromium
+        tags:
+        - tools
+      - include_role:
+            name: ypsman.sshd_config
+        tags:
+        - sshd
+  become: true
+  tags:
+  - tools
+  - sshd
+  

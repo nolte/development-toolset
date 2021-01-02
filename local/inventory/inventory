@@ -1,0 +1,1 @@
+vagranthost ansible_ssh_host=127.0.0.1 ansible_user=vagrant ansible_pass=vagrant ansible_ssh_pass=vagrant ansible_ssh_common_args='-o StrictHostKeyChecking=no'

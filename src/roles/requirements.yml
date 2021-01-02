@@ -1,0 +1,14 @@
+# from galaxy
+roles:
+  - src: bihealth.python3
+  - src: gantsign.oh-my-zsh
+  - src: geerlingguy.docker
+  - src: geerlingguy.pip
+  - src: markosamuli.asdf
+  - src: marverix.chromium
+  - src: sicruse.powerline-fonts
+  - src: xanmanning.vscode
+  - name: ypsman.sshd_config
+
+collections:
+  - name: community.general

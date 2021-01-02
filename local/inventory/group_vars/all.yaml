@@ -1,0 +1,66 @@
+# The Python versions to install.
+#python3_versions:
+#  - "3.8"
+docker_install_compose: true
+docker_users:
+  - "{{ ansible_user }}"
+
+pip_package: python3-pip
+pip_executable: pip3
+powerline_users:
+  - user: "{{ ansible_user }}"
+powerline_fonts:
+  - RobotoMono
+  - SourceCodePro
+  - DejaVuSansMono
+  - UbuntuMono
+oh_my_zsh_install: yes
+users:
+  - username: "{{ ansible_user }}"
+    oh_my_zsh:
+      zshrc: |      
+        # display kubctl context
+        autoload -U colors; colors
+        source $ZSH/custom/plugins/zsh-kubectl-prompt/kubectl.zsh
+        RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'%
+      theme: agnoster
+      plugins:
+        - git
+        - terraform
+        - helm
+        - pass
+        - kubectl
+        - asdf
+        - docker
+        - zsh-kubectl-prompt
+asdf_init_shell: true
+asdf_plugins:
+  - name: "terraform"
+    repository: ""
+    versions:
+      - "0.13.5"
+    global: "0.13.5"
+  - name: "helm"
+    repository: ""
+    versions:
+      - "3.4.1"
+    global: "3.4.1"
+  - name: "kubectl"
+    repository: ""
+    versions:
+      - "1.19.4"
+    global: "1.19.4"
+  - name: "kind"
+    repository: "https://github.com/reegnz/asdf-kind.git"
+    versions:
+      - "0.9.0"
+    global: "0.9.0"
+  - name: "packer"
+    repository: "https://github.com/Banno/asdf-hashicorp.git"
+    versions:
+      - "1.6.5"
+    global: "1.6.5"
+
+sshd_PermitRootLogin: "no"
+sshd_PasswordAuthentication: "no"
+sshd_ListenAddress: "0.0.0.0"

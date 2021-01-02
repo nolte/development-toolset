@@ -1,0 +1,138 @@
+# The Python versions to install.
+#python3_versions:
+#  - "3.8"
+docker_install_compose: true
+docker_users:
+  - "{{ ansible_user }}"
+
+pip_package: python3-pip
+pip_executable: pip3
+powerline_users:
+  - user: "{{ ansible_user }}"
+powerline_fonts:
+  - RobotoMono
+  - SourceCodePro
+  - DejaVuSansMono
+  - UbuntuMono
+oh_my_zsh_install: yes
+users:
+  - username: "{{ ansible_user }}"
+    oh_my_zsh:
+      zshrc: |
+        source <(tkn completion zsh)
+        source <(kubectl completion zsh)
+        source <(helm completion zsh)
+        
+        # display kubctl context
+        autoload -U colors; colors
+        source $ZSH/custom/plugins/zsh-kubectl-prompt/kubectl.zsh
+        RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'%       
+      theme: agnoster
+      plugins:
+        - asdf
+        - docker
+        - git
+        - helm
+        - kubectl
+        - pass
+        - terraform
+        - vault
+asdf_init_shell: true
+asdf_plugins:
+  - name: "act"
+    repository: ""
+    versions:
+      - "0.2.17"
+    global: "0.2.17"  
+  - name: "terraform"
+    repository: ""
+    versions:
+      - "0.13.5"
+    global: "0.13.5"
+  - name: "helm"
+    repository: ""
+    versions:
+      - "3.4.1"
+    global: "3.4.1"
+  - name: "kubectl"
+    repository: ""
+    versions:
+      - "1.19.4"
+    global: "1.19.4"
+  - name: "kind"
+    repository: "https://github.com/reegnz/asdf-kind.git"
+    versions:
+      - "0.9.0"
+    global: "0.9.0"
+  - name: "packer"
+    repository: "https://github.com/Banno/asdf-hashicorp.git"
+    versions:
+      - "1.6.5"
+    global: "1.6.5"
+  - name: "jq"
+    repository: "https://github.com/ryodocx/asdf-jq.git"
+    versions:
+      - "1.6"
+    global: "1.6"
+  - name: "yq"
+    repository: "https://github.com/beardix/asdf-yq.git"
+    versions:
+      - "3.4.1"
+    global: "3.4.1"
+  - name: "golang"
+    repository: "https://github.com/kennyp/asdf-golang.git"
+    versions:
+      - "1.15.5"
+    global: "1.15.5"
+  - name: "vagrant"
+    repository: "https://github.com/Banno/asdf-hashicorp.git"
+    versions:
+      - "2.2.14"
+    global: "2.2.14"
+  - name: "restic"
+    repository: "https://github.com/ivuk/asdf-restic.git"
+    versions:
+      - "0.11.0"
+    global: "0.11.0"
+  - name: "mc"
+    repository: "https://github.com/penpyt/asdf-mc.git"
+    versions:
+      - "RELEASE.2020-11-25T23-04-07Z"
+    global: "RELEASE.2020-11-25T23-04-07Z"    
+  - name: "tekton-cli"
+    repository: "https://github.com/johnhamelink/asdf-tekton-cli.git"
+    versions:
+      - "0.14.0"
+    global: "0.14.0"    
+  - name: "direnv"
+    repository: ""
+    versions:
+      - "2.25.0"
+    global: "2.25.0"   
+  - name: "sinker"
+    repository: "https://github.com/elementalvoid/asdf-sinker.git"
+    versions:
+      - "0.14.0"
+    global: "0.14.0"
+  - name: "vendir"
+    repository: "https://github.com/k14s/asdf-k14s.git"
+    versions:
+      - "0.14.0"
+    global: "0.14.0"
+  - name: "kustomize"
+    repository: "https://github.com/Banno/asdf-kustomize.git"
+    versions:
+      - "3.8.7"
+    global: "3.8.7"
+  - name: "hugo"
+    repository: "https://github.com/beardix/asdf-hugo.git"
+    versions:
+      - "extended-0.79.0"
+    global: "extended-0.79.0"
+  - name: "goreleaser"
+    repository: "https://github.com/kforsthoevel/asdf-goreleaser.git"
+
+
+sshd_PermitRootLogin: "no"
+sshd_PasswordAuthentication: "no"
+sshd_ListenAddress: "0.0.0.0"

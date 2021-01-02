@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+$script = <<SCRIPT
+apt-get update
+apt-get install sshpass -y
+SCRIPT
+
+
+Vagrant.configure("2") do |config|
+  # TODO change to self build vagrant box with packer!
+  config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
+  config.vm.box_version = "20201107.01"
+  config.vm.provider "virtualbox" do |v|
+    v.gui = true
+  end
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder "../src", "/vagrant/isac/src"
+  config.vm.synced_folder "./inventory", "/vagrant/isac/inventory"
+  config.vm.provision "shell", inline: $script
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "/vagrant/isac/src/playbooks/playbook-toolset.yaml"
+    ansible.inventory_path = "/vagrant/isac/inventory"
+    ansible.galaxy_role_file = "/vagrant/isac/src/roles/requirements.yml"
+    ansible.verbose        = true
+    #ansible.install        = true
+    ansible.limit          = "vagranthost"
+    ansible.install_mode = "pip"
+    ansible.version = "2.10.4"
+    ansible.galaxy_roles_path = "/etc/ansible/roles"
+    ansible.galaxy_command = "sudo ansible-galaxy collection install -r %{role_file} && sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
+  end
+end

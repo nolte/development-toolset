@@ -1,0 +1,33 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: ../requirements.yml
+driver:
+  name: docker
+platforms:
+  #- name: centos
+  #  image: centos:8
+  - name: ubuntu
+    image: ubuntu:20.04
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        oh_my_zsh_install: yes
+        users:
+          - username: johnd
+            oh_my_zsh:
+              theme: robbyrussell
+              plugins:
+                - git
+        asdf_init_shell: true
+        asdf_plugins:
+          - name: "terraform" # a plugin name
+            repository: "" # a plugin repository, optional
+            versions: # a list of the package versions to install
+              - "0.13.5"
+            global: "0.13.5" # set as a global version, optional
+verifier:
+  name: ansible

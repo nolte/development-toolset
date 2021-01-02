@@ -1,0 +1,19 @@
+---
+- debug: var=users
+
+- name: Git checkout (zsh-kubectl-prompt)
+  become_user: "{{ item.username }}"
+  git:
+    repo: 'https://github.com/superbrothers/zsh-kubectl-prompt.git'
+    dest: /home/{{ item.username }}/.oh-my-zsh/custom/plugins/zsh-kubectl-prompt
+  with_items:
+    - "{{ users }}"
+
+- name: insert/update "Extra ZSH Env Scripts" configuration block in ~/.zshrc
+  blockinfile:
+    path: /home/{{ item.username }}/.zshrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK extrazsh "
+    block: "{{ item.oh_my_zsh.zshrc | default('') }}"
+  with_items:
+    - "{{ users }}"
+
