@@ -131,7 +131,13 @@ asdf_plugins:
     global: "extended-0.79.0"
   - name: "goreleaser"
     repository: "https://github.com/kforsthoevel/asdf-goreleaser.git"
-
+  - name: "golangci-lint"
+    repository: "https://github.com/hypnoglow/asdf-golangci-lint.git"
+  - name: "go-repos-sync"
+    repository: "https://github.com/nolte/asdf-go-repos-sync.git"
+    versions:
+      - "0.0.2"
+    global: "0.0.2"
 
 sshd_PermitRootLogin: "no"
 sshd_PasswordAuthentication: "no"
