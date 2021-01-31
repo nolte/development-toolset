@@ -131,7 +131,8 @@ asdf_plugins:
     global: "extended-0.79.0"
   - name: "goreleaser"
     repository: "https://github.com/kforsthoevel/asdf-goreleaser.git"
-
+  - name: "task"
+    repository: "https://github.com/nolte/asdf-task.git"
 
 sshd_PermitRootLogin: "no"
 sshd_PasswordAuthentication: "no"
