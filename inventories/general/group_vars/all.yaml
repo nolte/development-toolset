@@ -133,6 +133,8 @@ asdf_plugins:
     repository: "https://github.com/kforsthoevel/asdf-goreleaser.git"
   - name: "task"
     repository: "https://github.com/nolte/asdf-task.git"
+  - name: "argo"
+    repository: "https://github.com/sudermanjr/asdf-argo.git"
 
 sshd_PermitRootLogin: "no"
 sshd_PasswordAuthentication: "no"
