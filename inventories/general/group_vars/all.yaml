@@ -135,6 +135,8 @@ asdf_plugins:
     repository: "https://github.com/nolte/asdf-task.git"
   - name: "argo"
     repository: "https://github.com/sudermanjr/asdf-argo.git"
+  - name: "terragrunt"
+    repository: "https://github.com/td7x/asdf-terragrunt.git"
 
 sshd_PermitRootLogin: "no"
 sshd_PasswordAuthentication: "no"
